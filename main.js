@@ -19,8 +19,8 @@ form.addEventListener("submit", (evento) => {
 
     // itemAtual - variável para tranformar o valor do input num objeto. onde nome, após os dois pontos(:) é o parametro de valor recebido, onde o usuário adiciona uma palavra
     const itemAtual = {
-    "nome": nome.value,
-    "quantidade": quantidade.value
+        "nome": nome.value,
+        "quantidade": quantidade.value
     }
 
     criaElemento(itemAtual)
