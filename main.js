@@ -5,6 +5,7 @@ const lista = document.getElementById("lista")
 // array que receberá palavras escritas pelo usuário no input
 const itens = JSON.parse(localStorage.getItem("itens")) || []
 
+// para cada item elemento ele cria esse elemento
 itens.forEach( (elemento) => {
     criaElemento(elemento)
 });
@@ -25,15 +26,19 @@ form.addEventListener("submit", (evento) => {
         "quantidade": quantidade.value
     }
 
+    // verificação caso exista um elemento na lista, caso tenha chama a função atualizaElemento e atualiza.
     if (existe) {
         itemAtual.id = existe.id
 
         atualizaElemento(itemAtual)
 
+        // Pega o Array e procura nele se o id é igual ao id que existe, caso tenha ele tranforma no valor ditado pelo usuário
         itens[itens.findIndex(elemento => elemento.id === existe.id)] = itemAtual
     } else {
+        // caso contrario ele pega o item atual e adiciona um id. Ele pega o id do ultimo e adiciona +1 ao id. Se o o ultimo tiver um id 4 ele somará ao novo item ou o itemAtual +1 ficando com id 5
         itemAtual.id = itens[itens.lenght - 1] ? (itens[itens.lenght-1]).id + 1 : 0
 
+        // cria o elemento conforme as informações ditas pelo usuário, recebendo a constante itemAtual com essas informações
         criaElemento(itemAtual)
 
         // empurra o itemAtual e seus objetos para o array
@@ -48,6 +53,7 @@ form.addEventListener("submit", (evento) => {
     quantidade.value = ""
 })
 
+// função de criação de elementos, itens novos na lista
 function criaElemento(item) {
 
     // cria uma li e adiciona a classe "item"
@@ -69,14 +75,18 @@ function criaElemento(item) {
     lista.appendChild(novoItem)
 }
 
+// função que seleciona o data-attributes e muda o numero do id no html, atualiza o item na condição if na linha 29
 function atualizaElemento(item) {
     document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
 }
 
+// função que cria o botao deleta
 function botaoDeleta(id) {
+    // cria o botão, colocando ele no html e deixando ecrito nele um X
     const elementoBotao = document.createElement('button')
     elementoBotao.innerText = "X"
 
+    // evento que ao clicar chama a função deletaElemento que recebe o parametro o ultimo item e o id
     elementoBotao.addEventListener('click', function() {
         deletaElemento(this.parentNode, id)
     })
@@ -84,10 +94,13 @@ function botaoDeleta(id) {
     return elementoBotao
 }
 
+// função para deletar um elemento do LocalStorage recebendo a tag do item e o seu id
 function deletaElemento(tag, id) {
     tag.remove()
 
+    // splice deleta um item do Array. findIndex ajuda a encontrar o item, fazendo uma validação do parametro elemento
     itens.splice(itens.findIndex(elemento => elemento.id === id), 1)
 
+    // tranforma itens em uma string
     localStorage.setItem("itens", JSON.stringify(itens))
 }
