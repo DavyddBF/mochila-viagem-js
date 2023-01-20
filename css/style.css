@@ -1,13 +1,14 @@
 html {
-    background: radial-gradient(farthest-corner at right top, #21A09D, #06182D);
-    height: 100%;
+    background: radial-gradient(farthest-corner at right top, #21A09D, #06182D) no-repeat;
+    height: 100rem;
     font-family: 'Roboto', cursive;
 }
 
 .conteudo {
     padding: 10vh 2em 0;
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     gap: 2em;
 }
 
@@ -128,4 +129,28 @@ html {
     height: 40px;
     background: #C5965F;
     font-weight: 400;
+}
+
+@media (max-width: 728px) {
+    .conteudo {
+        flex-direction: column;
+    }
+
+    .principal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 100%;
+        padding: 2rem;
+    }
+
+    .mochila {
+        align-items: center;
+    }
+
+    .adicionar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
