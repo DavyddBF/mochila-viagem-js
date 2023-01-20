@@ -131,7 +131,7 @@ html {
     font-weight: 400;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
     .conteudo {
         flex-direction: column;
     }
